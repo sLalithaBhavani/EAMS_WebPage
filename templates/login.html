@@ -46,6 +46,9 @@ input[type="submit"] {
     <div id="formContainer">
         <form id="userForm" method="POST" action="/submit_form" >
             <!-- Add a hidden input field to store the filename -->
+            <label for="username">Image Name:</label><br>
+        <!-- This input field will be pre-filled if username is provided -->
+            <input type="text" id="username" name="username" value="{{ username }}" readonly required><br>
             <input type="hidden" id="filename" name="filename" value="{{ filename }}">
             
             <label for="firstName">Enter your first name:</label>
