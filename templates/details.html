@@ -13,15 +13,10 @@
     height: 100vh;
     margin: 0;
     background: linear-gradient(360deg, #3498db, #8e44ad);
-    /* background-image: url(' '); */
-    /* background-size: content; */
-    /* background-repeat: no-repeat; */
 }
 
 #formContainer {
     background-color: #fff;
-    /* background: linear-gradient(90deg, #34db9b, #448cad); */
-
     border-radius: 8px;
     box-shadow: 14px 14px 18px rgba(0.1, 0.1, 0.1, 0.1);
     padding: 20px;
@@ -50,6 +45,9 @@ input[type="submit"] {
 <body>
     <div id="formContainer">
         <form id="userForm" method="POST" action="/submit_form" >
+            <!-- Add a hidden input field to store the filename -->
+            <input type="hidden" id="filename" name="filename" value="{{ filename }}">
+            
             <label for="firstName">Enter your first name:</label>
             <input type="text" id="firstName" name="firstName" onkeydown="moveToNext(event, 'lastName')">
             
@@ -65,21 +63,5 @@ input[type="submit"] {
             <input type="submit" id="submitBtn" value="Submit">
         </form>
     </div>
-
-    <script>
-        document.getElementById("myForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            const response = await fetch('/submit_form', {
-                method: 'POST',
-                body: JSON.stringify(Object.fromEntries(formData.entries())),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            const data = await response.json();
-            console.log(data);
-        });
-    </script>
 </body>
 </html>
