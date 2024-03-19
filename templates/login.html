@@ -49,7 +49,7 @@ input[type="submit"] {
             <label for="username">Image Name:</label><br>
         <!-- This input field will be pre-filled if username is provided -->
             <input type="text" id="username" name="username" value="{{ username }}" readonly required><br>
-            <input type="hidden" id="filename" name="filename" value="{{ filename }}">
+            <!-- <input type="hidden" id="filename" name="filename" value="{{ filename }}"> -->
             
             <label for="firstName">Enter your first name:</label>
             <input type="text" id="firstName" name="firstName" onkeydown="moveToNext(event, 'lastName')">
@@ -66,5 +66,25 @@ input[type="submit"] {
             <input type="submit" id="submitBtn" value="Submit">
         </form>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const textFields = document.querySelectorAll("input[type='text']");
+            const lastTextField = textFields[textFields.length - 1];
+            lastTextField.addEventListener("keydown", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    document.getElementById("submitBtn").click();
+                }
+            });
+            for (let i = 0; i < textFields.length - 1; i++) {
+                textFields[i].addEventListener("keydown", function(event) {
+                    if (event.key === "Enter") {
+                        event.preventDefault();
+                        textFields[i + 1].focus();
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
